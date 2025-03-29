@@ -56,16 +56,33 @@ p {
 
 #panel {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 450px;
-  height: 100%;
-  padding: 48px;
-  background-color: #ffffff;
-  border-top-right-radius: 32px;
-  border-bottom-right-radius: 32px;
-  box-sizing: border-box;
-  z-index: 2;
+  top: 20px; /* Отступ сверху */
+  left: 20px; /* Отступ слева */
+  z-index: 998; /* Уровень слоя */
+  background-color: #ffffff; /* Фиолетовый фон */
+  color: #000000; /* Белый текст */
+  padding: 20px; /* Внутренние отступы */
+  border-radius: 25px; /* Закругленные углы */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Легкая тень */
+  max-width: 300px; /* Максимальная ширина панели */
+}
+
+#panel h2, #panel h3 {
+  margin: 0;
+  font-size: 20px; /* Размер заголовков */
+  font-weight: bold; /* Жирный текст */
+}
+
+#panel p {
+  margin: 0;
+  font-size: 14px; /* Размер текста */
+}
+
+#panel .divider {
+  height: 1px;
+  background-color: #000000;
+  opacity: 0.5;
+  margin: 10px 0;
 }
 
 .flex {
