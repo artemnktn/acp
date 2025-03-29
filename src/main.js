@@ -94,4 +94,39 @@ map.on("load", () => {
 
     item.addEventListener("click", onClick);
   });
+
+  let popup; // Declare a single popup instance
+
+  // Add a `mousemove` event to dynamically update the popup when hovering over a feature
+  map.on("mousemove", "neighborhood_accessibility", (e) => {
+    // Check if there are features under the mouse
+    if (e.features.length > 0) {
+      const feature = e.features[0];
+
+      // Check if the feature has the `neighborhood_name` property
+      if (feature.properties.neighborhood_name) {
+        // If a popup already exists, update its content and position
+        if (popup) {
+          popup.setLngLat(e.lngLat).setHTML(`<strong>${feature.properties.neighborhood_name}</strong>`);
+        } else {
+          // Create a new popup if it doesn't exist
+          popup = new mapboxgl.Popup({
+            closeButton: false,
+            closeOnClick: false,
+          })
+            .setLngLat(e.lngLat)
+            .setHTML(`<strong>${feature.properties.neighborhood_name}</strong>`)
+            .addTo(map);
+        }
+      }
+    }
+  });
+
+  // Add a `mouseleave` event to remove the popup when the mouse leaves the layer
+  map.on("mouseleave", "neighborhood_accessibility", () => {
+    if (popup) {
+      popup.remove();
+      popup = null; // Reset the popup instance
+    }
+  });
 });
