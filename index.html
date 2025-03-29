@@ -5,21 +5,24 @@
   <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
   <meta name="viewport"
     content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>Community Hub Accessibility</title>
+  <title>Community Centers Accessibility Map</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
   <link rel="stylesheet" href="./styles.css">
   <link href="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.css" rel="stylesheet">
-  <script src="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.js"></script>
   <script src="./src/main.js" type="module"></script>
 </head>
 
 <body>
   <div id="root">
     <div id="map"></div>
+    <div id="zoom-controls" style="position: absolute; bottom: 20px; right: 20px; z-index: 999;">
+      <button id="zoom-in" style="padding: 15px; font-size: 20px; cursor: pointer; background-color: rgb(182, 182, 182); color: #ffffff; border: none; border-radius: 50px; margin-bottom: 10px;">+</button>
+      <button id="zoom-out" style="padding: 15px; font-size: 20px; cursor: pointer; background-color: rgb(182, 182, 182); color: #ffffff; border: none; border-radius: 50px;">-</button>
+    </div>
     <div id="panel">
       <div class="flex column gap24">
         <span class="flex-span">
-          <h2>Community Centers Accessibility</h2>
+          <h2>Community Centers Accessibility Map</h2>
         </span>
         <span class="flex-span">
           <p>Analysing the catchment areas and pedestrian flows to the community centre to assess spatial accessibility,
@@ -36,6 +39,9 @@
             <span class="flex-span">
               <div class="flex space-between">
                 <span class="flex-span chart-label">0%</span>
+                <span class="flex-span chart-label">25%</span>
+                <span class="flex-span chart-label">50%</span>
+                <span class="flex-span chart-label">75%</span>
                 <span class="flex-span chart-label">100%</span>
               </div>
             </span>

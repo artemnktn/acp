@@ -1,4 +1,6 @@
 import './styles.css'
+import mapboxgl from 'mapbox-gl';
+
 
 mapboxgl.accessToken = "pk.eyJ1IjoiYXJ0ZW1ua3RuIiwiYSI6ImNtN2t0eGJnMzAzcTAybnJ6eGIyNGVwZjQifQ.m31J0mxEu4qvB66LxdGkPg";
 
@@ -10,6 +12,7 @@ const map = new mapboxgl.Map({
 });
 
 map.setPadding({ left: 450 });
+
 
 map.on("load", () => {
   console.log("Map loaded");
@@ -57,37 +60,21 @@ map.on("load", () => {
           "neighborhood_accessibility",
           "fill-color",
           [
-            "case",
-            [
-              "all",
-              [">=", ["get", activeColumn], 0], ["<=", ["get", activeColumn], 20]
-            ],
-            "#e5f3b2",
-            [
-              "all",
-              [">", ["get", activeColumn], 20], ["<=", ["get", activeColumn], 40]
-            ],
-            "#aada95",
-            [
-              "all",
-              [">", ["get", activeColumn], 40], ["<=", ["get", activeColumn], 60]
-            ],
-            "#5fb671",
-            [
-              "all",
-              [">", ["get", activeColumn], 60], ["<=", ["get", activeColumn], 80]
-            ],
-            "#348550",
-            [">", ["get", activeColumn], 80],
-            "#20563e",
-            "#fdfee7",
-          ],
+            "step",
+            ["get", activeColumn],
+            "#fdfee7", // Default color for values below the first step
+            20, "#e5f3b2", // 0-20%
+            40, "#aada95", // 20-40%
+            60, "#5fb671", // 40-60%
+            80, "#348550", // 60-80%
+            100, "#20563e" // 80-100%
+          ]
         );
       } else {
         map.setPaintProperty(
           "neighborhood_accessibility",
           "fill-color",
-          "#b5b8b8",
+          "#b5b8b8", // Default color when no column is active
         );
       }
     };
@@ -97,25 +84,36 @@ map.on("load", () => {
 
   let popup; // Declare a single popup instance
 
-  // Add a `mousemove` event to dynamically update the popup when hovering over a feature
   map.on("mousemove", "neighborhood_accessibility", (e) => {
-    // Check if there are features under the mouse
     if (e.features.length > 0) {
       const feature = e.features[0];
 
-      // Check if the feature has the `neighborhood_name` property
+      // Check if the feature has a neighborhood name
       if (feature.properties.neighborhood_name) {
-        // If a popup already exists, update its content and position
+        // Determine the content of the popup based on the state of activeColumn
+        const popupContent = activeColumn
+          ? `
+            <div style="font-family: Inter, sans-serif; font-size: 12px; color: #333; padding: 10px; border-radius: 8px; background: #ffffff;">
+              <strong style="color:rgb(0, 67, 45);">Neighborhood:</strong> ${feature.properties.neighborhood_name}<br>
+              <strong style="color:rgb(0, 67, 45);">Accessibility (%):</strong> ${feature.properties[activeColumn] || "N/A"}%
+            </div>
+          `
+          : `
+            <div style="font-family: Arial, sans-serif; font-size: 14px; color: #333; padding: 10px; border-radius: 8px; background: #ffffff;">
+              <strong style="color:rgb(0, 67, 45);">Neighborhood:</strong> ${feature.properties.neighborhood_name}
+            </div>
+          `;
+
+        // Update or create the popup
         if (popup) {
-          popup.setLngLat(e.lngLat).setHTML(`<strong>${feature.properties.neighborhood_name}</strong>`);
+          popup.setLngLat(e.lngLat).setHTML(popupContent);
         } else {
-          // Create a new popup if it doesn't exist
           popup = new mapboxgl.Popup({
             closeButton: false,
             closeOnClick: false,
           })
             .setLngLat(e.lngLat)
-            .setHTML(`<strong>${feature.properties.neighborhood_name}</strong>`)
+            .setHTML(popupContent)
             .addTo(map);
         }
       }
@@ -128,5 +126,12 @@ map.on("load", () => {
       popup.remove();
       popup = null; // Reset the popup instance
     }
+  });
+  document.getElementById("zoom-in").addEventListener("click", () => {
+    map.zoomIn(); // Увеличить масштаб
+  });
+
+  document.getElementById("zoom-out").addEventListener("click", () => {
+    map.zoomOut(); // Уменьшить масштаб
   });
 });
