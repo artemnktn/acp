@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>Community Hub Accessibility</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+    <link rel="stylesheet" href="./styles.css">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.js"></script>
+    <script src="./src/main.js" type="module"></script>
+  </head>
+  <body>
+    <div id="root">
+    <div id="map"></div>
+    <div id="panel">
+      <div class="flex column gap24">
+        <span class="flex-span">
+          <h2>Community Hub Accessibility</h2>
+        </span>
+        <span class="flex-span">
+          <p>Analysing the catchment areas and pedestrian flows to the community centre to assess spatial accessibility, user distribution, and connectivity across different neighbourhoods.</p>
+        </span>
+        <span class="flex-span">
+          <div class="divider"></div>
+        </span>
+        <span class="flex-span">
+          <h3>Which neighbourhoods are the most accessible in the city?</h3>
+        </span>
+        <span class="flex-span">
+          <div class="flex column gap8">
+            <span class="flex-span">
+              <div class="flex space-between">
+                <span class="flex-span chart-label">0%</span>
+                <span class="flex-span chart-label">100%</span>
+              </div>
+            </span>
+            <span class="flex-span">
+              <div class="chart"></div>
+            </span>
+          </div>
+        </span>
+        <span class="flex-span mt16">
+          <div class="flex column gap16">
+            <span class="flex-span mb8">
+              <div class="flex align-center">
+                <span class="flex-span w25 justify-center"></span>
+                <span class="flex-span w25 justify-center">
+                  <div class="flex column gap8">
+                    <span class="flex-span justify-center">
+                      <img src="./assets/walking.png" width="50%">
+                    </span>
+                    <span class="flex-span justify-center switch-table-cell">
+                      by Foot
+                    </span>
+                  </div>
+                </span>
+                <span class="flex-span w25 justify-center">
+                  <div class="flex column gap8">
+                    <span class="flex-span justify-center">
+                      <img src="./assets/car.png" width="50%">
+                    </span>
+                    <span class="flex-span justify-center switch-table-cell">
+                      by Car
+                    </span>
+                  </div>
+                </span>
+                <span class="flex-span w25 justify-center">
+                  <div class="flex column gap8">
+                    <span class="flex-span justify-center">
+                      <img src="./assets/bus.png" width="50%">
+                    </span>
+                    <span class="flex-span justify-center switch-table-cell">
+                      by Bus
+                    </span>
+                  </div>
+                </span>
+              </div>
+            </span>
+            <span class="flex-span">
+              <div class="flex align-center">
+                <span class="flex-span w25 switch-table-cell">Kids</span>
+                <span class="flex-span w25 justify-center">
+                  <div class="switch-table-control" data-column="kids_W"></div>
+                </span>
+                <span class="flex-span w25 justify-center">
+                  <div class="switch-table-control" data-column="kids_C"></div>
+                </span>
+                <span class="flex-span w25 justify-center">
+                  <div class="switch-table-control" data-column="kids_B"></div>
+                </span>
+              </div>
+            </span>
+            <span class="flex-span">
+              <div class="flex align-center">
+                <span class="flex-span w25 switch-table-cell">Teens</span>
+                <span class="flex-span w25 justify-center">
+                  <div class="switch-table-control" data-column="teenagers_W"></div>
+                </span>
+                <span class="flex-span w25 justify-center">
+                  <div class="switch-table-control" data-column="teenagers_C"></div>
+                </span>
+                <span class="flex-span w25 justify-center">
+                  <div class="switch-table-control" data-column="teenagers_B"></div>
+                </span>
+              </div>
+            </span>
+            <span class="flex-span">
+              <div class="flex align-center">
+                <span class="flex-span w25 switch-table-cell">Adults</span>
+                <span class="flex-span w25 justify-center">
+                  <div class="switch-table-control" data-column="adults_W"></div>
+                </span>
+                <span class="flex-span w25 justify-center">
+                  <div class="switch-table-control" data-column="adults_C"></div>
+                </span>
+                <span class="flex-span w25 justify-center">
+                  <div class="switch-table-control" data-column="adults_B"></div>
+                </span>
+              </div>
+            </span>
+            <span class="flex-span">
+              <div class="flex align-center">
+                <span class="flex-span w25 switch-table-cell">Elderly</span>
+                <span class="flex-span w25 justify-center">
+                  <div class="switch-table-control" data-column="elderly_W"></div>
+                </span>
+                <span class="flex-span w25 justify-center">
+                  <div class="switch-table-control" data-column="elderly_C"></div>
+                </span>
+                <span class="flex-span w25 justify-center">
+                  <div class="switch-table-control" data-column="elderly_B"></div>
+                </span>
+              </div>
+            </span>
+          </div>
+        </span>
+      </div>
+    </div>
+  </body>
+</html>
